@@ -1,0 +1,25 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    background-color: #f8f8f8;
+    padding: 8px 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 3px;
+  }
+  
+  .sorting-options {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-left: 3px;
+  }
+  
+  .sorting-options li {
+    margin-left: 16px;
+    cursor: pointer;
+  }
+  
+  .sorting-options li:hover {
+    text-decoration: underline;
+  }
