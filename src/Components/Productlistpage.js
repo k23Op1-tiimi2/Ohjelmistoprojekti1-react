@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import "./App.css";
+import "../App.css";
+import Navbar from './Navbar';
+import {Link} from 'react-router-dom';
 
 const ProductPlaceholder = ({ title, description, price, imageUrl }) => (
   <div className="product">
@@ -52,6 +54,7 @@ const Productlist = () => {
 
   return (
     <div className="orstore">
+      <Navbar />
       <div className="products-grid">
         {products.map((product, index) => (
           <ProductPlaceholder key={index} {...product} />

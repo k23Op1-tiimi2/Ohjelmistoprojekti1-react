@@ -23,3 +23,8 @@
   .sorting-options li:hover {
     text-decoration: underline;
   }
+
+  .homebutton{
+    margin-right: 16px;
+    cursor: pointer;
+  }

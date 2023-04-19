@@ -1,12 +1,18 @@
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Productlist from './Productlistapp';
-import Navbar from './Components/Navbar';
+import Productlist from './Components/Productlistpage';
+import HomePage from './Components/Homepage';
+
 function App() {
   return (
     <div className="App">
-      <h1>O & R Store</h1>
-      <Navbar />
-      <Productlist />
+      <Router>
+        <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/products" element={<Productlist />} />
+        </Routes>
+      </Router>
     </div>
   );
 }
