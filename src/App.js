@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './App.css';
-import Productlist from './Components/Productlistpage';
+import Productlist from './Components/Productlist';
 import HomePage from './Components/Homepage';
 
 function App() {
@@ -16,5 +16,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
