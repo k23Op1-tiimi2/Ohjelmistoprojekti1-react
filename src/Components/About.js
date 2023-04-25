@@ -8,7 +8,7 @@ export default function AboutPage() {
             <Link to="/products">Products</Link>{' '}
 
             <p>We are Omppu and Rane, two brothers who got an amazing opportunity to do what we really want:
-                we want to sell dog clothes! In 2023 We've established a store in Helsinki and set up an online
+                we want to sell dog clothes! In 2023 we established a store in Helsinki and set up an online
                 store.</p>
             <p> R&O Oy<br></br>
                 Business ID: 7821669-9<br></br>
