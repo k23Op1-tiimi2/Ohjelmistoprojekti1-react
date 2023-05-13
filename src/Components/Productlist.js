@@ -23,6 +23,12 @@ const Productlist = () => {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    if (reservationComplete) {
+      alert("Reservation successful!");
+    }
+  }, [reservationComplete]);
+
   const fetchProducts = () => {
     fetch("http://localhost:8080/products")
       .then((response) => response.json())
@@ -76,7 +82,7 @@ const Productlist = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         product_id: selectedProduct.id,
-        name: reservationDetails.name,
+        custName: reservationDetails.name,
         email: reservationDetails.email,
         phone: reservationDetails.phone
       })
@@ -89,6 +95,7 @@ const Productlist = () => {
             email: "",
             phone: ""
           });
+          setReservationModalOpen(false); // close the modal
         } else {
           throw new Error("Failed to create reservation.");
         }
@@ -96,6 +103,10 @@ const Productlist = () => {
       .catch((error) => {
         console.error(error);
       });
+  }
+
+  const handleReservationCancel = () => {
+    setReservationModalOpen(false); // close the modal without saving anything
   }
 
   return (
@@ -112,21 +123,44 @@ const Productlist = () => {
         <Modal isOpen={reservationModalOpen} onRequestClose={() => setReservationModalOpen(false)}>
           <h2>Reserve {selectedProduct.name}</h2>
           <form onSubmit={handleReservationSubmit}>
-            <label htmlFor="name">Name:</label>
-            <input type="text" name="name" value={reservationDetails.name} onChange={handleReservationDetailsChange} />
-            <label htmlFor="email">Email:</label>
-            <input type="email" name="email" value={reservationDetails.email} onChange={handleReservationDetailsChange} />
-            <label htmlFor="phone">Phone:</label>
-            <input type="tel" name="phone" value={reservationDetails.phone} onChange={handleReservationDetailsChange} />
-            <button type="submit">Submit Reservation</button>
-          </form>
-          {reservationComplete && (
-          <p>Reservation for {selectedProduct.name} successfully created!</p>
-          )}
-        </Modal>
-        )}
-      </div>
-    );
-  };
+          <div>
+            <label>Name:</label>
+            <input
+              type="text"
+              name="name"
+              value={reservationDetails.name}
+              onChange={handleReservationDetailsChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Email:</label>
+            <input
+              type="email"
+              name="email"
+              value={reservationDetails.email}
+              onChange={handleReservationDetailsChange}
+              required
+            />
+          </div>
+          <div>
+            <label>Phone:</label>
+            <input
+              type="tel"
+              name="phone"
+              value={reservationDetails.phone}
+              onChange={handleReservationDetailsChange}
+              required
+            />
+          </div>
+          <button type="submit">Reserve</button>
+          <button type="button" onClick={handleReservationCancel}>Cancel</button>
+          {reservationComplete && alert("Reservation successful!")}
+        </form>
+      </Modal>
+      )}
+    </div>
+  );
+};	
 
 export default Productlist;
