@@ -6,7 +6,7 @@ const HomePage = () => {
         <div>
             <h1>Home Page</h1>
             <Link to="/products">Products</Link>{' '}
-            <Link to="/about">About</Link>{' '}
+            <Link to="/about">About</Link>{' '}            
         </div>
     );
 }
