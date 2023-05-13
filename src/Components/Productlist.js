@@ -152,7 +152,7 @@ const Productlist = () => {
               </div>
               <button type="submit">Reserve</button>
               <button type="button" onClick={handleReservationCancel}>Cancel</button>
-              {reservationComplete && alert("Reservation successful!")}
+              
             </form>
           </Modal>
         )}
