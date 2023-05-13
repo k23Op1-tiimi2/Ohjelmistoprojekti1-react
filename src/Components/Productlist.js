@@ -68,9 +68,34 @@ const Productlist = () => {
     });
   }
 
-  const handleReservationSubmit = () => {
-    setReservationComplete(true);
-    setReservationModalOpen(false);
+  const handleReservationSubmit = (e) => {
+    e.preventDefault();
+
+    fetch("http://localhost:8080/reservations", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        product_id: selectedProduct.id,
+        name: reservationDetails.name,
+        email: reservationDetails.email,
+        phone: reservationDetails.phone
+      })
+    })
+      .then((response) => {
+        if (response.ok) {
+          setReservationComplete(true);
+          setReservationDetails({
+            name: "",
+            email: "",
+            phone: ""
+          });
+        } else {
+          throw new Error("Failed to create reservation.");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   }
 
   return (
@@ -88,24 +113,20 @@ const Productlist = () => {
           <h2>Reserve {selectedProduct.name}</h2>
           <form onSubmit={handleReservationSubmit}>
             <label htmlFor="name">Name:</label>
-            <input type="text" name="name" value={reservationDetails.name} onChange={handleReservationDetailsChange} required />
-            <br />
+            <input type="text" name="name" value={reservationDetails.name} onChange={handleReservationDetailsChange} />
             <label htmlFor="email">Email:</label>
-            <input type="email" name="email" value={reservationDetails.email} onChange={handleReservationDetailsChange} required />
-            <br />
+            <input type="email" name="email" value={reservationDetails.email} onChange={handleReservationDetailsChange} />
             <label htmlFor="phone">Phone:</label>
-            <input type="tel" name="phone" value={reservationDetails.phone} onChange={handleReservationDetailsChange} required />
-            <br />
-            <button type="submit">Reserve</button>
-            <button onClick={() => setReservationModalOpen(false)}>Cancel</button>
+            <input type="tel" name="phone" value={reservationDetails.phone} onChange={handleReservationDetailsChange} />
+            <button type="submit">Submit Reservation</button>
           </form>
           {reservationComplete && (
-            <p>Reservation complete!</p>
+          <p>Reservation for {selectedProduct.name} successfully created!</p>
           )}
         </Modal>
-      )}
-    </div>
-  );
-};
+        )}
+      </div>
+    );
+  };
 
-export default Productlist
+export default Productlist;
