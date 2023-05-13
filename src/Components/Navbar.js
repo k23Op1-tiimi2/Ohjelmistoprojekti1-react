@@ -6,12 +6,11 @@ import {Link} from 'react-router-dom';
 const Navbar = () => {
   return (
     <nav className="navbar">
-      <Link className="homebutton" to="/">Home Page</Link>
-      <h2>Sort by:</h2>
       <ul className="sorting-options">
-        <li>Option 1</li>
-        <li>Option 2</li>
-        <li>Option 3</li>
+        <li><Link className="homebutton" to="/">Home Page</Link></li>
+        <li><Link className="productsbutton" to="/products">Products</Link></li>
+        <li><Link className="manufacturersbutton" to="/manufacturers">Manufacturers</Link></li>
+        <li><Link className="aboutbutton" to="/about">About</Link></li>
       </ul>
     </nav>
   );
