@@ -17,17 +17,13 @@ const Productlist = () => {
     phone: ""
   });
   const [reservationComplete, setReservationComplete] = useState(false);
+  const [reservationId, setReservationId] = useState(null);
 
   useEffect(() => {
     fetchProducts();
     fetchManufacturers();
   }, []);
-
-  useEffect(() => {
-    if (reservationComplete) {
-      alert("Reservation successful!");
-    }
-  }, [reservationComplete]);
+  
 
   const fetchProducts = () => {
     fetch("http://localhost:8080/products")
@@ -50,7 +46,7 @@ const Productlist = () => {
 
   const handleReservationSubmit = (e) => {
     e.preventDefault();
-
+  
     fetch("http://localhost:8080/reservations", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -63,13 +59,17 @@ const Productlist = () => {
     })
       .then((response) => {
         if (response.ok) {
-          setReservationComplete(true);
-          setReservationDetails({
-            name: "",
-            email: "",
-            phone: ""
+          response.json().then(data => {
+            setReservationId(data.reservationId); // set the reservation ID
+            setReservationComplete(true);
+            setReservationDetails({
+              name: "",
+              email: "",
+              phone: ""
+            });
+            setReservationModalOpen(false); // close the modal
+            alert(`Reservation ${data.reservationId} successful!`);
           });
-          setReservationModalOpen(false); // close the modal
         } else {
           throw new Error("Failed to create reservation.");
         }
